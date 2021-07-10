@@ -13,6 +13,4 @@ resource "aws_s3_bucket" "prod_tf_course" {
   }
 }
 
-resource "aws_defult_vpc" "default" {
-
-}
+resource "aws_default_vpc" "default" {}
