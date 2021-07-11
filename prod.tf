@@ -37,8 +37,28 @@ resource "aws_security_group" "prod_sg"{
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
   tags = {
   "Terraform" : "true"
   }
 
+}
+
+resource "aws_instance" "prod_web_instance" {
+  ami           = "ami-05105e44227712eb6" 
+  instance_type = "t2.micro" 
+  vpc_security_group_ids = [
+    aws_security_group.prod_sg.id
+]
+
+tags = {
+  "Terraform" : "true"
+  }
+}
+resource "aws_eip" "prod_wei_eip" {
+  instance = aws_instance.prod_web_instance.id
+
+tags = {
+  "Terraform" : "true"
+  }
 }
